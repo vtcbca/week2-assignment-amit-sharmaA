@@ -7,18 +7,18 @@ INSERT INTO stud02 VALUES(01,'Ram'),(02,'Amit'),(03,'jay'),(04,'Vishal'),(05,'Om
 select * from stud02;
 
 +--------------+
-¦ id ¦  name   ¦
-+----+---------¦
-¦ 1  ¦ Ram     ¦
-¦ 2  ¦ Amit    ¦
-¦ 3  ¦ jay     ¦
-¦ 4  ¦ Vishal  ¦
-¦ 5  ¦ Om      ¦
-¦ 6  ¦ Sachin  ¦
-¦ 7  ¦ Meet    ¦
-¦ 8  ¦ Sunny   ¦
-¦ 9  ¦ Santosh ¦
-¦ 10 ¦ sanju   ¦
+Â¦ id Â¦  name   Â¦
++----+---------Â¦
+Â¦ 1  Â¦ Ram     Â¦
+Â¦ 2  Â¦ Amit    Â¦
+Â¦ 3  Â¦ jay     Â¦
+Â¦ 4  Â¦ Vishal  Â¦
+Â¦ 5  Â¦ Om      Â¦
+Â¦ 6  Â¦ Sachin  Â¦
+Â¦ 7  Â¦ Meet    Â¦
+Â¦ 8  Â¦ Sunny   Â¦
+Â¦ 9  Â¦ Santosh Â¦
+Â¦ 10 Â¦ sanju   Â¦
 +--------------+
 
 2.stud_details(id,city,mobileno) (Use I'd as foreign key)
@@ -30,41 +30,44 @@ INSERT INTO stud_details02 VALUES(01,'banglor',9786534123),(02,'kolkata',7654987
 SELECT * FROM stud_details02;
 
 +-----------------------------+
-¦ id ¦   city    ¦ mobile_no  ¦
-+----+-----------+------------¦
-¦ 1  ¦ banglor   ¦ 9786534123 ¦
-¦ 2  ¦ kolkata   ¦ 7654987632 ¦
-¦ 3  ¦ Ahemdavad ¦ 9678876543 ¦
-¦ 4  ¦ plasana   ¦ 9056432154 ¦
-¦ 5  ¦ dehli     ¦ 9182736450 ¦
-¦ 6  ¦ bardoli   ¦ 9924822933 ¦
-¦ 7  ¦ surat     ¦ 9087654321 ¦
-¦ 8  ¦ bharuch   ¦ 9870654321 ¦
-¦ 9  ¦ surat     ¦ 9824106749 ¦
-¦ 10 ¦ bardoli   ¦ 9662582933 ¦
+Â¦ id Â¦   city    Â¦ mobile_no  Â¦
++----+-----------+------------Â¦
+Â¦ 1  Â¦ banglor   Â¦ 9786534123 Â¦
+Â¦ 2  Â¦ kolkata   Â¦ 7654987632 Â¦
+Â¦ 3  Â¦ Ahemdavad Â¦ 9678876543 Â¦
+Â¦ 4  Â¦ plasana   Â¦ 9056432154 Â¦
+Â¦ 5  Â¦ dehli     Â¦ 9182736450 Â¦
+Â¦ 6  Â¦ bardoli   Â¦ 9924822933 Â¦
+Â¦ 7  Â¦ surat     Â¦ 9087654321 Â¦
+Â¦ 8  Â¦ bharuch   Â¦ 9870654321 Â¦
+Â¦ 9  Â¦ surat     Â¦ 9824106749 Â¦
+Â¦ 10 Â¦ bardoli   Â¦ 9662582933 Â¦
 +-----------------------------+
 
 1.Display whose student come from the Surat City.
 
-select * from stud_details02 where city='surat';
-+-------------------------+
-¦ id ¦ city  ¦ mobile_no  ¦
-+----+-------+------------¦
-¦ 7  ¦ surat ¦ 9087654321 ¦
-¦ 9  ¦ surat ¦ 9824106749 ¦
-+-------------------------+
+ select*from stud02 s, stud_details02 sd
+ where s.id=sd.id and city='surat';
+
++----------------------------------------+
+Â¦ id Â¦  name   Â¦ id Â¦ city  Â¦ mobile_no  Â¦
++----+---------+----+-------+------------Â¦
+Â¦ 7  Â¦ Meet    Â¦ 7  Â¦ surat Â¦ 9087654321 Â¦
+Â¦ 9  Â¦ Santosh Â¦ 9  Â¦ surat Â¦ 9824106749 Â¦
++----------------------------------------+
+
 
 2. Display student details whose city name start with 'B'.
 
 SELECT * FROM stud_details02 WHERE city LIKE 'b%';
 
 +---------------------------+
-¦ id ¦  city   ¦ mobile_no  ¦
-+----+---------+------------¦
-¦ 1  ¦ banglor ¦ 9786534123 ¦
-¦ 6  ¦ bardoli ¦ 9924822933 ¦
-¦ 8  ¦ bharuch ¦ 9870654321 ¦
-¦ 10 ¦ bardoli ¦ 9662582933 ¦
+Â¦ id Â¦  city   Â¦ mobile_no  Â¦
++----+---------+------------Â¦
+Â¦ 1  Â¦ banglor Â¦ 9786534123 Â¦
+Â¦ 6  Â¦ bardoli Â¦ 9924822933 Â¦
+Â¦ 8  Â¦ bharuch Â¦ 9870654321 Â¦
+Â¦ 10 Â¦ bardoli Â¦ 9662582933 Â¦
 +---------------------------+
 
 3.Update mobileno who are comming from 'Surat'
@@ -74,16 +77,16 @@ UPDATE stud_details02 SET mobile_no = '9824106749' WHERE city like'surat';
 SELECT * FROM stud_details02;
 
 +-----------------------------+
-¦ id ¦   city    ¦ mobile_no  ¦
-+----+-----------+------------¦
-¦ 1  ¦ banglor   ¦ 9786534123 ¦
-¦ 2  ¦ kolkata   ¦ 7654987632 ¦
-¦ 3  ¦ Ahemdavad ¦ 9678876543 ¦
-¦ 4  ¦ plasana   ¦ 9056432154 ¦
-¦ 5  ¦ dehli     ¦ 9182736450 ¦
-¦ 6  ¦ bardoli   ¦ 9924822933 ¦
-¦ 7  ¦ surat     ¦ 9824106749 ¦
-¦ 8  ¦ bharuch   ¦ 9870654321 ¦
-¦ 9  ¦ surat     ¦ 9824106749 ¦
-¦ 10 ¦ bardoli   ¦ 9662582933 ¦
+Â¦ id Â¦   city    Â¦ mobile_no  Â¦
++----+-----------+------------Â¦
+Â¦ 1  Â¦ banglor   Â¦ 9786534123 Â¦
+Â¦ 2  Â¦ kolkata   Â¦ 7654987632 Â¦
+Â¦ 3  Â¦ Ahemdavad Â¦ 9678876543 Â¦
+Â¦ 4  Â¦ plasana   Â¦ 9056432154 Â¦
+Â¦ 5  Â¦ dehli     Â¦ 9182736450 Â¦
+Â¦ 6  Â¦ bardoli   Â¦ 9924822933 Â¦
+Â¦ 7  Â¦ surat     Â¦ 9824106749 Â¦
+Â¦ 8  Â¦ bharuch   Â¦ 9870654321 Â¦
+Â¦ 9  Â¦ surat     Â¦ 9824106749 Â¦
+Â¦ 10 Â¦ bardoli   Â¦ 9662582933 Â¦
 +-----------------------------+
