@@ -1,0 +1,178 @@
+
+1. Create table
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+p="CREATE TABLE EMPLOYEE02(eid number PRIMARY KEY, ename text, dept text, basic number, branch text);"
+cur=conn.cursor()
+conn.execute(p)
+conn.commit()
+conn.close()
+
+2. Insert 5 Records directly, 5 records using tuple and 5 records using taking input from user
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+p="INSERT INTO EMPLOYEE02 VALUES\
+(1,'Amit','HR',7500,'Bardoli'),\
+(2,'harsh','IT',8000,'Surat'),\
+(3,'Vishal','Inventory',5000,'Bardoli'),\
+(4,'jay','Inventory',4500,'Navsari'),\
+(5,'Raj','Account',5000,'Ahmedabad');"
+cur=conn.cursor()
+conn.execute(p)
+L=[(6,'santosh','Account',7000,'Ahmedabad'),\
+(7,'soham','IT',5000,'Navsari'),\
+(8,'Aman','HR',6500,'Bardoli'),\
+(9,'hardik','HR',8000,'Ahmedabad'),\
+(10,'sankar','Account',9000,'Navsari')]
+q="INSERT INTO EMPLOYEE02 VALUES(?,?,?,?,?);"
+cur=conn.executemany(q,L)
+L=[]
+for i in range(5):
+	eid=int(input("Enter ID: "))
+	ename=input("Enter name: ")
+	dept=input("Enter Department: ")
+	basic=int(input("Enter basic: "))
+	branch=input("Enter branch: ")
+	t=(eid,ename,dept,basic,branch)
+	L.append(t)
+cur=conn.executemany(q,L)
+conn.commit()
+conn.close()
+
+3. Update records who are from "Surat" branch with increment in salary 10%.
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+u="UPDATE EMPLOYEE02 SET basic=basic+(basic*0.10) WHERE branch LIKE 'Surat';"
+cur=conn.cursor()
+curr=conn.execute(u)
+conn.commit()
+conn.close()
+
+4. Print All records.
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+s="SELECT * FROM EMPLOYEE02;"
+cur=conn.cursor()
+cur.execute(s)
+r=cur.fetchall()
+print("Emplopyee02 Details:")
+for i in range(len(r)):
+	print("eID= {}".format(r[i][0]))
+	print("eName= {}".format(r[i][1]))
+	print("Department= {}".format(r[i][2]))
+	print("Basic= {}".format(r[i][3]))
+	print("Branch= {}".format(r[i][4]))
+conn.commit()
+conn.close()
+
+5. Print records where dept is "HR" and "IT".
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+s="SELECT * FROM EMPLOYEE02 WHERE dept LIKE 'HR' or dept LIKE 'IT';"
+cur=conn.cursor()
+cur.execute(s)
+r=cur.fetchall()
+print("Emplopyee02 Details who are from IT or HR department:")
+for i in range(len(r)):
+	print("eID= {}".format(r[i][0]))
+	print("eName= {}".format(r[i][1]))
+	print("Department= {}".format(r[i][2]))
+	print("Basic= {}".format(r[i][3]))
+	print("Branch= {}".format(r[i][4]))
+conn.commit()
+conn.close()
+
+6. Print records in sorting order of department.
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+s="SELECT * FROM EMPLOYEE02 order by dept;"
+cur=conn.cursor()
+cur.execute(s)
+r=cur.fetchall()
+print("Emplopyee02 Details[Sorted a dept]:")
+for i in range(len(r)):
+	print("eID= {}".format(r[i][0]))
+	print("eName= {}".format(r[i][1]))
+	print("Department= {}".format(r[i][2]))
+	print("Basic= {}".format(r[i][3]))
+	print("Branch= {}".format(r[i][4]))
+conn.commit()
+conn.close()
+
+7. Print records where basic is >6000.
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+s="SELECT * FROM EMPLOYEE02 WHERE basic>6000;"
+cur=conn.cursor()
+cur.execute(s)
+r=cur.fetchall()
+print("Emplopyee02 Details[basic>6000]:")
+for i in range(len(r)):
+	print("eID= {}".format(r[i][0]))
+	print("eName= {}".format(r[i][1]))
+	print("Department= {}".format(r[i][2]))
+	print("Basic= {}".format(r[i][3]))
+	print("Branch= {}".format(r[i][4]))
+conn.commit()
+conn.close()
+
+8. Print records whrere employee name second character is "r".
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+s="SELECT * FROM EMPLOYEE02 WHERE ename LIKE '_r%';"
+cur=conn.cursor()
+cur.execute(s)
+r=cur.fetchall()
+print("Emplopyee02 Details[second char in ename is 'r']:")
+for i in range(len(r)):
+	print("eID= {}".format(r[i][0]))
+	print("eName= {}".format(r[i][1]))
+	print("Department= {}".format(r[i][2]))
+	print("Basic= {}".format(r[i][3]))
+	print("Branch= {}".format(r[i][4]))
+conn.commit()
+conn.close()
+
+9. Grouping record of employee who are from "Account" and "Inventory".
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+s="SELECT * FROM EMPLOYEE02 WHERE DEPT IN('Account','Inventory') ORDER BY DEPT;"
+cur=conn.cursor()
+cur.execute(s)
+r=cur.fetchall()
+print("Emplopyee02 Details[grouped depatment as 'Account' or 'Inventory']:")
+for i in range(len(r)):
+	print("eID= {}".format(r[i][0]))
+	print("eName= {}".format(r[i][1]))
+	print("Department= {}".format(r[i][2]))
+	print("Basic= {}".format(r[i][3]))
+	print("Branch= {}".format(r[i][4]))
+conn.commit()
+conn.close()
+
+10. Print all records based on branch name in descending order.
+->
+import sqlite3 as sq
+conn=sq.connect("esm.db")
+s="SELECT * FROM EMPLOYEE02 order by branch desc;"
+cur=conn.cursor()
+cur.execute(s)
+r=cur.fetchall()
+print("Emplopyee02 Details[Sorted branch in descending order]:")
+for i in range(len(r)):
+	print("eID= {}".format(r[i][0]))
+	print("eName= {}".format(r[i][1]))
+	print("Department= {}".format(r[i][2]))
+	print("Basic= {}".format(r[i][3]))
+	print("Branch= {}".format(r[i][4]))
+conn.commit()
+conn.close()
